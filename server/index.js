@@ -4,6 +4,7 @@ const cors = require("cors")
 const mysql = require("mysql")
 
 app.use(cors())
+app.use(express.json())
 
 const db = mysql.createConnection({
   host: "localhost",
@@ -24,8 +25,14 @@ app.get("/", (req,res) => {
 })
 
 
-app.get("/", (req, res) => {
-  res.json({"msg":"Hello"})
+app.post("/post", async (req, res) => {
+  const sql = "INSERT INTO `testtable` (`id`, `name`, `address`) VALUES (NULL, ?, ?)";
+  db.query(sql, [req.body.name, req.body.address], (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    res.json(data)
+  })
 })
 
 app.listen(3001, () => {
