@@ -10,12 +10,12 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "test"
+  database: "compsci_ewall"
 })
 
 
 app.get("/", (req,res) => {
-  const sql = "select * from testtable"
+  const sql = "select * from posts"
   db.query(sql, (err, data) => {
     if (err) {
       console.log(err);
@@ -26,8 +26,8 @@ app.get("/", (req,res) => {
 
 
 app.post("/post", async (req, res) => {
-  const sql = "INSERT INTO `testtable` (`id`, `name`, `address`) VALUES (NULL, ?, ?)";
-  db.query(sql, [req.body.name, req.body.address], (err, data) => {
+  const sql = "INSERT INTO `posts` (`id`, `postAuthor`, `postText`, `createdAt`) VALUES (NULL, ?, ?, ?)";
+  db.query(sql, [req.body.postAuthor, req.body.postText, '2024-03-18 13:30:56'], (err, data) => {
     if (err) {
       console.log(err);
     }
