@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import moment from 'moment';
 
 function App() {
   const [list, setList] = useState([])
   const [newData, setNewData] = useState({
     postAuthor: "",
-    postText: ""
+    postText: "",
+    createdAt: ""
   })
   const [refresh, setRefresh] = useState(true)
 
@@ -13,9 +15,6 @@ function App() {
     axios.get('http://localhost:3001/').then((res) => {
       console.log(res.data);
       setList(res.data)
-      const date = new Date()
-      const dateFormat = `${date.getFullYear()}-0${date.getMonth() + 1}-${date.getDate()}`
-      console.log(dateFormat);
     })
   }, [refresh])
 
@@ -40,6 +39,16 @@ function App() {
     })
   }
 
+  const convertLocal = (utcTime) => {
+    // let utc = new Date(utcTime)
+    // let local = utc.toLocaleDateString() + "" + utc.toLocaleTimeString() 
+
+    // let local = Date.parseLocale()
+
+    let local = moment(utcTime).format("MM-DD-YYYY h:mm:ssa")
+    return local
+  }
+
 
   return (
     <div>
@@ -52,7 +61,7 @@ function App() {
         return (
           <div key={item.id} className="p-4 bg-green-500 mb-2">
             <h1 className="text-2xl">{item.postText}</h1>
-            <h3 className="font-bold"> - {item.postAuthor}</h3>
+            <h3 className="font-bold"> - {item.postAuthor} / {convertLocal(item.createdAt)}</h3>
           </div>
         )
       })}

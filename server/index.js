@@ -26,8 +26,8 @@ app.get("/", (req,res) => {
 
 
 app.post("/post", async (req, res) => {
-  const sql = "INSERT INTO `posts` (`id`, `postAuthor`, `postText`, `createdAt`) VALUES (NULL, ?, ?, ?)";
-  db.query(sql, [req.body.postAuthor, req.body.postText, '2024-03-18 13:30:56'], (err, data) => {
+  const sql = "INSERT INTO `posts` (`id`, `postAuthor`, `postText`, `createdAt`) VALUES (NULL, ?, ?, CURRENT_TIMESTAMP())";
+  db.query(sql, [req.body.postAuthor, req.body.postText], (err, data) => {
     if (err) {
       console.log(err);
     }
