@@ -15,7 +15,7 @@ const db = mysql.createConnection({
 
 
 app.get("/", (req,res) => {
-  const sql = "select * from posts"
+  const sql = "select * from posts order by createdAt DESC"
   db.query(sql, (err, data) => {
     if (err) {
       console.log(err);
