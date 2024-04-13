@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { SuccessContext } from "../App";
 
 const NewPost = () => {
   const navigate = useNavigate()
@@ -9,6 +10,7 @@ const NewPost = () => {
     postAuthor: "",
     postText: ""
   })
+  const [success,setSuccess] = useContext(SuccessContext)
   const handleChange = (e) => {
     setNewData({...newData, [e.target.name]: e.target.value})
   }
@@ -34,6 +36,10 @@ const NewPost = () => {
       console.log("Data Inserted");
       setNewData({postAuthor: "", postText: ""})
       navigate('/')
+      setSuccess('flex')
+      setTimeout(() => {
+        setSuccess('hidden')
+      }, 1500);
       }).catch((err) => {
       console.log(err);
       })

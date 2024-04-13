@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const mysql = require("mysql")
+require("dotenv").config()
 
 app.use(cors())
 app.use(express.json())
@@ -35,6 +36,6 @@ app.post("/post", async (req, res) => {
   })
 })
 
-app.listen(3001, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server running on port 3001");
 })
