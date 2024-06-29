@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import NewPost from "./pages/NewPost";
 import React, { useState, createContext } from "react";
+import Admin from "./pages/Admin";
 
 export const SuccessContext = React.createContext();
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/posts" element={<Posts/>}/>
           <Route path="/newpost" element={<NewPost/>}/>
           <Route path="posts/:postId" element={<Post/>}/>
+          <Route path="/admin" element={<Admin/>}></Route>
         </Routes>
       </div>
     </SuccessContext.Provider>

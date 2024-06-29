@@ -36,6 +36,16 @@ app.post("/post", async (req, res) => {
   })
 })
 
+app.delete("/admin", async (req, res) => {
+  const sql = `DELETE FROM posts WHERE id = ${req.body.id}`
+  db.query(sql, (err,data) => {
+    if (err) {
+      console.log(err);
+    }
+    res.json(data)
+  })
+})
+
 app.listen(process.env.PORT, () => {
   console.log("Server running on port 3001");
 })
