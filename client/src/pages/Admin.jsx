@@ -24,7 +24,7 @@ const Admin = () => {
         <div className="grid lg:grid-cols-4 gap-5 mb-4 mt-4">
           {list.map((post) => {
             return(
-              <Card data={post} key={post.id}/>
+              <Card data={post} isAdmin={true} key={post.id} setRefresh={() => setRefresh(!refresh)}/>
             )
           })}
         </div>

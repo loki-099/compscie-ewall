@@ -17,6 +17,7 @@ const Posts = () => {
     axios.get('http://localhost:3001/').then((res) => {
       setList(res.data)
       console.log(list);
+      console.log(location.pathname);
     })
   }, [refresh])
 
@@ -29,7 +30,7 @@ const Posts = () => {
         <div className="grid lg:grid-cols-4 gap-5 mb-4">
           {list.map((post) => {
             return(
-              <Card data={post} key={post.id}/>
+              <Card data={post} isAdmin={false} key={post.id}/>
             )
           })}
         </div>

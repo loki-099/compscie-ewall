@@ -36,9 +36,10 @@ app.post("/post", async (req, res) => {
   })
 })
 
-app.delete("/admin", async (req, res) => {
-  const sql = `DELETE FROM posts WHERE id = ${req.body.id}`
-  db.query(sql, (err,data) => {
+app.delete("/:id", async (req, res) => {
+  let post_id = req.params.id
+  const sql = "DELETE FROM posts WHERE id = ?"
+  db.query(sql, [post_id], (err,data) => {
     if (err) {
       console.log(err);
     }
@@ -47,5 +48,5 @@ app.delete("/admin", async (req, res) => {
 })
 
 app.listen(process.env.PORT, () => {
-  console.log("Server running on port 3001");
+  console.log(`Server running on port ${process.env.PORT}`);
 })
